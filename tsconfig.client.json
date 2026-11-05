@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "rootDir": "./src",
+    "outDir": "./dist/client-types",
+    "tsBuildInfoFile": "./dist/client.tsbuildinfo",
+    "types": ["vite/client"]
+  },
+  "include": ["src/client/**/*", "src/shared/**/*.ts", "src/vite-env.d.ts"],
+  "exclude": [
+    "src/client/**/*.test.ts",
+    "src/client/**/*.test.tsx",
+    "src/shared/**/*.test.ts",
+    "src/shared/**/*.typetest.ts"
+  ]
+}
