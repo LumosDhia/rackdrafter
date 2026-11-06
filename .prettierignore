@@ -1,0 +1,11 @@
+node_modules
+dist
+data
+coverage
+playwright-report
+test-results
+.tmp
+package-lock.json
+drizzle/meta
+*.tsbuildinfo
+PLAN.md
