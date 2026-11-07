@@ -1,0 +1,40 @@
+import { service } from '../../define.ts';
+
+export const custom = [
+  service({
+    slug: 'custom-container',
+    name: 'Custom container',
+    cat: 'custom',
+    desc: 'Any Docker image you set yourself.',
+    url: 'https://docs.docker.com',
+    image: 'registry.example.com/app:latest',
+    tags: ['docker', 'image', 'generic', 'other'],
+    cpu: 100,
+    ram: 128,
+    icon: { prefer: 'glyph', glyph: 'box' },
+  }),
+  service({
+    slug: 'custom-systemd',
+    name: 'Custom systemd unit',
+    cat: 'custom',
+    desc: 'A native service managed by systemd.',
+    url: 'https://systemd.io',
+    runtime: 'systemd',
+    tags: ['systemd', 'native', 'daemon', 'generic'],
+    cpu: 100,
+    ram: 128,
+    icon: { prefer: 'glyph', glyph: 'terminal-2' },
+  }),
+  service({
+    slug: 'custom-external',
+    name: 'External service',
+    cat: 'custom',
+    desc: 'A SaaS or off-site endpoint you depend on.',
+    url: 'https://en.wikipedia.org/wiki/Software_as_a_service',
+    runtime: 'external',
+    tags: ['saas', 'external', 'third party', 'api'],
+    cpu: 0,
+    ram: 0,
+    icon: { prefer: 'glyph', glyph: 'cloud' },
+  }),
+];

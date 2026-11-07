@@ -1,0 +1,48 @@
+import { service } from '../../define.ts';
+
+export const platform = [
+  service({
+    slug: 'proxmox-ve-ui',
+    name: 'Proxmox VE UI',
+    cat: 'platform',
+    desc: 'Management web UI on the hypervisor host.',
+    url: 'https://pve.proxmox.com/wiki/Main_Page',
+    runtime: 'systemd',
+    tags: ['pve', 'proxmox', 'hypervisor', 'web ui'],
+    cpu: 0,
+    ram: 0,
+    ports: [['https', 8006, 8006, 'tcp', 'https']],
+    admin: true,
+    requires: ['hypervisor'],
+    icon: { aliases: { 'dashboard-icons': 'proxmox', selfhst: 'proxmox' } },
+  }),
+  service({
+    slug: 'truenas-scale',
+    name: 'TrueNAS SCALE',
+    cat: 'platform',
+    desc: 'Linux-based NAS operating system with ZFS.',
+    url: 'https://www.truenas.com/truenas-scale/',
+    runtime: 'external',
+    tags: ['nas', 'zfs', 'storage', 'apps'],
+    cpu: 500,
+    ram: 8192,
+    ports: [
+      ['http', 80, 80, 'tcp', 'http'],
+      ['https', 443, 443, 'tcp', 'https'],
+    ],
+    admin: true,
+  }),
+  service({
+    slug: 'openmediavault',
+    name: 'OpenMediaVault',
+    cat: 'platform',
+    desc: 'Debian-based NAS distribution with a web UI.',
+    url: 'https://www.openmediavault.org',
+    runtime: 'external',
+    tags: ['nas', 'omv', 'storage', 'debian'],
+    cpu: 250,
+    ram: 1024,
+    ports: [['http', 80, 80, 'tcp', 'http']],
+    admin: true,
+  }),
+];
