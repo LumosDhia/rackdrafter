@@ -48,7 +48,7 @@ I accept the preferred stack with three additions, none of which replace anythin
 2. **Containment:** drop a service or LXC/VM onto a host to place it there. Hosts expand into frames or collapse into cards with service chips.
 3. **Links:** all 8 kinds (`ethernet`, `wifi`, `vpn-tunnel`, `reverse-proxy`, `depends-on`, `replicates-to`, `backup-to`, `mounts`), with per-kind validation, styling and inspector forms.
 4. **Networking:** a subnet manager (CIDR, VLAN, gateway, DHCP range, purpose, scope), a NIC editor, a next-free-IP allocator, port mappings, firewall policy, router port forwards, advertised routes, DNS zones and hostnames.
-5. **Catalog:** 140 entries (45 devices and 95 services, listed in §5.3) with locally bundled icons and a generated `THIRD_PARTY_NOTICES.md`.
+5. **Catalog:** 145 entries (47 devices and 98 services, listed in §5.3) with locally bundled icons and a generated `THIRD_PARTY_NOTICES.md`.
 6. **Analysis:** every rule in §6, live (debounced 250 ms), in a findings drawer. Clicking a finding selects its subjects.
 7. **Failure simulation mode:** toggle nodes as failed and see down, degraded and unreachable overlays. Also a SPOF ranking.
 8. **Budget panel:** per-host CPU/RAM/disk bars and a monthly cost and power table.
@@ -2538,3 +2538,23 @@ npm run verify               # incl. templates.spec.ts ("0 errors" badge for bot
 - Firefox/WebKit pass via `npm run test:e2e:all`.
 
 **Acceptance:** `npm run verify` and `npm run test:e2e:all` both green; `a11y.spec.ts` covers 3 screens with zero serious or critical issues.
+
+---
+
+## 12. Risks and mitigations
+
+| Risk | Impact | Mitigation (concrete) |
+|---|---|---|
+| **Icon licensing** | Shipping logos without proper attribution, or a source whose license forbids redistribution | Sources pinned to commit SHAs. The license is read from the pinned ref and must match a known SPDX ID or the script fails. The generated `THIRD_PARTY_NOTICES.md` has full texts and per-slug provenance plus a trademark disclaimer, and is served in-app. Every icon passes through the Tabler fallback, so dropping a source means deleting it from `SOURCES` and re-running `icons:fetch --offline`: it degrades to glyphs, never breaks. |
+| **Malicious or bloated SVG** | XSS via `<img>`-loaded SVG is inert, but inline Simple Icons/Tabler are injected as HTML | The sanitiser rejects scripts/foreignObject/handlers/external hrefs. Inline SVGs come only from npm packages pinned in the lockfile, and their content is checked by sha256 in the lock. Files are capped at 64 KB. |
+| **React Flow performance at 300 nodes** | Jank during drag and analysis | Memoised node components that read granular store slices. `WeakMap`-cached flow nodes with structural sharing. Drag applies silently and records history only at the end. `onlyRenderVisibleElements` above 150 nodes. No edge labels except on hover for low-priority kinds. Analysis debounced at 250 ms on idle, with a < 30 ms budget enforced by `perf.test.ts`. The v1.1 Worker move is already isolated because `analyze` is pure. The `@perf` e2e spec guards fps. |
+| **Undo granularity** | Too many entries (per drag frame or keystroke) or too few (multi-step ops split) | The §3.2 table is normative. Coalesce keys for typing and nudges, `recordManual` for drag/resize, `transact` for compound operations. Tested in `history.test.ts`. |
+| **Export determinism** | Flaky snapshots, noisy diffs for users | Pure generators with no IDs, time or randomness, enforced by lint. Fixed key orders, numeric IP sort, quoted ports, LF + trailing newline, fixed zip mtime. The shuffle-invariance test permutes `nodes`/`links` arrays and asserts byte-identical output. |
+| **Schema evolution** | Old saved projects stop loading | `schemaVersion` + migration chain + frozen fixtures per version. `ProjectTooNewError` with a clear message. Autosave never overwrites a project that failed to parse; the original is kept under `ds:v1:quarantine:{id}`. |
+| **Bundle size** | Slow first load | Generators, importer, `yaml`, `fflate`, `html-to-image` load lazily on dialog open. Icons are static files fetched on demand (brand) or a tiny inlined subset (~60 glyphs). Fonts are Latin subset and 5 weights. `bundle:check` enforces ≤ 350 KB gzip for the entry chunk. |
+| **Accessibility** | Canvas apps are notoriously inaccessible | Every palette item is a focusable button that inserts on Enter. React Flow nodes are focusable with `aria-label` "{kind} {label}, {status}, {n} findings". Arrow keys nudge. Inspector forms have labels. Findings drawer is a table with row buttons. Link kinds are distinguished by dash/marker, and severity by icon + text, never color alone. Reduced motion is honoured. `axe` runs in e2e. |
+| **Mobile** | Touch drag-and-drop and dense UI don't fit phones | Out of scope for editing in v1. Below 1024 px: read-only viewer (pan/zoom/inspect, export). Touch editing is listed under Later. |
+| **Modelling ambiguity (LXC vs docker vs systemd ports)** | Wrong conflict results | Explicit `runtime` and `bindDeviceId` rules (§2.3, §6.3) with tests for each runtime. Users get concrete messages naming device, IP and service. |
+| **HTML5 DnD in Playwright** | Flaky e2e drag | `locator.dragTo` works for HTML5 DnD in Chromium. The Enter-to-insert path is also tested. Firefox/WebKit specs use the keyboard path via a `dropFromPalette` fallback when `browserName !== 'chromium'`. |
+| **`html-to-image` regressions** | Broken SVG/PNG export | Exact pin `1.11.11`, e2e asserts on file signatures and the presence of the text "Jellyfin". |
+| **Seed facts drift from reality** | Reference design misleads the user | All inferred values are marked `// ASSUMPTION:` and listed in §9.6 and in the template's note node. Seed tests assert facts verbatim (IPs, VMIDs, ports, RAM) so accidental edits fail. |
