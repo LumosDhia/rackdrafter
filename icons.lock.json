@@ -1,0 +1,914 @@
+{
+  "version": 1,
+  "entries": {
+    "raspberry-pi-4": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/raspberry-pi-4.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/raspberry-pi.svg",
+      "sha256": "3e48eedf8e5ce8dadfe1b09cc4dfd065983fce5de7bc448afbc6ce3801b90a84",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/raspberry-pi-4-light.svg"
+    },
+    "raspberry-pi-5": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/raspberry-pi-5.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/raspberry-pi.svg",
+      "sha256": "3e48eedf8e5ce8dadfe1b09cc4dfd065983fce5de7bc448afbc6ce3801b90a84",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/raspberry-pi-5-light.svg"
+    },
+    "docker-host": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/docker-host.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/docker.svg",
+      "sha256": "f211ff249c107c6b2f76ade41297b6b6eb58c3fec677edf6cd5af6715ea5884d",
+      "multicolour": false
+    },
+    "k8s-control-plane": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/k8s-control-plane.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/kubernetes.svg",
+      "sha256": "dba9d08f8cb7257c85c772a7f7d251b5c9247c810cd007e0ee2bd6fabc588098",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/k8s-control-plane-light.svg"
+    },
+    "k8s-worker": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/k8s-worker.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/kubernetes.svg",
+      "sha256": "dba9d08f8cb7257c85c772a7f7d251b5c9247c810cd007e0ee2bd6fabc588098",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/k8s-worker-light.svg"
+    },
+    "proxmox-node": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/proxmox-node.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/proxmox.svg",
+      "sha256": "3544eaf42ed3028e456d2bec7834e9b2717ae5c84fef9e35a26f5930825767d1",
+      "multicolour": false
+    },
+    "cloudflare-edge": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/cloudflare-edge.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/cloudflare.svg",
+      "sha256": "e0daec0890c2e68b80f1dd16d606614dfb4115f718ba2ec1bc5d951dd2b19182",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/cloudflare-edge-light.svg"
+    },
+    "firewall-appliance": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/firewall-appliance.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/pfsense.svg",
+      "sha256": "b7c0591e18e12603506dd2272dbb46adeac2b213912e60eee42d63a4b412a269",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/firewall-appliance-light.svg"
+    },
+    "router": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/router.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/openwrt.svg",
+      "sha256": "b11519ebd36b222d4f1b9767264fca1b2873867e3201e5e6eb100a05564e8e02",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/router-light.svg"
+    },
+    "nas-2bay": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/nas-2bay.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/synology.svg",
+      "sha256": "2859b795bebcbe5405a79450bd1e528dd8e21f4474643f528e54aa2c5af4dc46",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/nas-2bay-light.svg"
+    },
+    "nas-4bay": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/nas-4bay.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/synology.svg",
+      "sha256": "2859b795bebcbe5405a79450bd1e528dd8e21f4474643f528e54aa2c5af4dc46",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/nas-4bay-light.svg"
+    },
+    "steam-deck": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/steam-deck.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/steam.svg",
+      "sha256": "9ec3ebfc742b41d6dbf210d30f8aacf270f721fb902087aae58b6140d645c1e2",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/steam-deck-light.svg"
+    },
+    "audiobookshelf": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/audiobookshelf.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/audiobookshelf.svg",
+      "sha256": "80d0a45c1dae58448b631672aa7ec633aea8c0777d03ad2db0159a28cae60e4f",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/audiobookshelf-light.svg"
+    },
+    "immich": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/immich.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/immich.svg",
+      "sha256": "22a5b8d36b1714d04183b5ea04e24ef37056bff9b87ddb19c8e2c7ec9a9f1863",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/immich-light.svg"
+    },
+    "jellyfin": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/jellyfin.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/jellyfin.svg",
+      "sha256": "46421db3c312426a7776c39c3450ed3de8c1d85f06f75e22f8e8b0cc0113952b",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/jellyfin-light.svg"
+    },
+    "jellyseerr": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/jellyseerr.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/jellyseerr.svg",
+      "sha256": "e0574b05ac0550b5facd56eca10851663649a5f6366b22d736569def958b9aa2",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/jellyseerr-light.svg"
+    },
+    "kavita": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/kavita.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/kavita.svg",
+      "sha256": "dc210f62779bf99fcc3c34370b4b2e429f5d72ed62cb96994b946a8282c08a0d",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/kavita-light.svg"
+    },
+    "komga": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/komga.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/komga.svg",
+      "sha256": "736ececd8f1d0b7dffc7b7d4f18571e8dbe3b957920abff16d61ca564d5d7c60",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/komga-light.svg"
+    },
+    "navidrome": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/navidrome.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/navidrome.svg",
+      "sha256": "4f10dba17d2b353baaa2b50d9017995129dbc52549c59cdedf63b2bd6b9028b8",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/navidrome-light.svg"
+    },
+    "plex": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/plex.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/plex.svg",
+      "sha256": "5f313b9d685b4d698fac837734064a2b60c20fff295a873be404d34430e8d8a3",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/plex-light.svg"
+    },
+    "stash": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/stash.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/stash.svg",
+      "sha256": "1944269fbba174e11287fab225a323add479e10f35e58d88c59d511346ba0d0f",
+      "multicolour": false
+    },
+    "bazarr": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/bazarr.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/bazarr.svg",
+      "sha256": "42087cdd3d180fff1c8ff91d009ab2d56c35fdeb482ebb80d44b5351f302a626",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/bazarr-light.svg"
+    },
+    "flaresolverr": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/flaresolverr.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/flaresolverr.svg",
+      "sha256": "e01baa21acc5f7b03c0d6d3f3f2e27d77a1d7b301354e1a0c26734af57b893d7",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/flaresolverr-light.svg"
+    },
+    "lidarr": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/lidarr.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/lidarr.svg",
+      "sha256": "cb15f90df4ab966125bfd03dc8b9f53b6f0df580aba9cf6911394cf75596211b",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/lidarr-light.svg"
+    },
+    "prowlarr": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/prowlarr.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/prowlarr.svg",
+      "sha256": "0aecdda739970558a53c9ca171804cede0f2c5c95f41a2c9bbe09e20c1986876",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/prowlarr-light.svg"
+    },
+    "qbittorrent": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/qbittorrent.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/qbittorrent.svg",
+      "sha256": "a42e40298a500315135c3163fbc735fe1af9580d135ee251bfed35df997f4c96",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/qbittorrent-light.svg"
+    },
+    "radarr": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/radarr.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/radarr.svg",
+      "sha256": "aa85649b3de8d5228e4174dec7e3f4564b105876dc481ef491aeb99f4ec5b300",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/radarr-light.svg"
+    },
+    "sabnzbd": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/sabnzbd.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/sabnzbd.svg",
+      "sha256": "8e4de8dee7cf7cafecd9d079d75b17a1f24d012efe0943e69f71a59f8c08124a",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/sabnzbd-light.svg"
+    },
+    "sonarr": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/sonarr.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/sonarr.svg",
+      "sha256": "66a4242720c4dd8f20e4ad72ad3c0b31a5aad656921b1930ec8a9a0e232ba712",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/sonarr-light.svg"
+    },
+    "filebrowser": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/filebrowser.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/filebrowser.svg",
+      "sha256": "67f0145172395e97a23248dec3971a49742c64a91e76c6ea831df25022ed68fd",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/filebrowser-light.svg"
+    },
+    "nextcloud": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/nextcloud.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/nextcloud.svg",
+      "sha256": "55497d14efc7c7cd8d6d8a7fac443c06f1caa943cdc7e18e60bfa7b23bc29040",
+      "multicolour": false
+    },
+    "paperless-ngx": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/paperless-ngx.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/paperless-ngx.svg",
+      "sha256": "6edeaa31814eb82073c772014f922aa3d6efb795ae9a883fa2fc45267786aa60",
+      "multicolour": false
+    },
+    "stirling-pdf": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/stirling-pdf.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/stirling-pdf.svg",
+      "sha256": "5382fd72d4fce7256a2f3b82dd88c3e18d52d40b6bc49517831baa7e94236852",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/stirling-pdf-light.svg"
+    },
+    "syncthing": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/syncthing.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/syncthing.svg",
+      "sha256": "1876a0b0fdba3247cdb17efe43f0b823f19490ebe57ac79c03505c46b965a835",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/syncthing-light.svg"
+    },
+    "couchdb": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/couchdb.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/couchdb.svg",
+      "sha256": "b834f5a510445e5b298bde97512ba5962b812430489c0d894e52edfdc7ae01c7",
+      "multicolour": false
+    },
+    "influxdb": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/influxdb.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/influxdb.svg",
+      "sha256": "fae140509e3f3d5dbf1c6871b5a2640400b7d31f5cc7557cba81ca38d3673469",
+      "multicolour": false
+    },
+    "mariadb": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/mariadb.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/mariadb.svg",
+      "sha256": "c0565a4c41b22b9b832be96856ff3a3191b47e7767fc1cdd533828272ea22615",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/mariadb-light.svg"
+    },
+    "mongodb": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/mongodb.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/mongodb.svg",
+      "sha256": "17df20554ab1145f9af553e08cac9cf639c8226a14e1ab3665aba25fd2289587",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/mongodb-light.svg"
+    },
+    "postgres": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/postgres.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/postgresql.svg",
+      "sha256": "9c2eeaffab69fa80040507a9d1f264989e50c4bcf83998f8029b2551619e0cdd",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/postgres-light.svg"
+    },
+    "redis": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/redis.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/redis.svg",
+      "sha256": "7ade7e83027cf189e3d5314d0482b82dd3dbc71703606f6ecd0e836d030d5747",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/redis-light.svg"
+    },
+    "adguard-home": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/adguard-home.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/adguard-home.svg",
+      "sha256": "c9c0c31d1d5fdafdadf64a118c70300b7021c17e59918ddf1546836cbc3eae7c",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/adguard-home-light.svg"
+    },
+    "caddy": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/caddy.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/caddy.svg",
+      "sha256": "a3c9774193af19454bf03fdb391e6f16961f0d7d65dc60d4ec21ed2752c1d8d5",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/caddy-light.svg"
+    },
+    "cloudflared": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/cloudflared.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/cloudflared.svg",
+      "sha256": "73bc23ee8aa5105a6664f63d5c9a5054db4c622e8874ffeff2390d25281216e3",
+      "multicolour": false
+    },
+    "nginx": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/nginx.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/nginx.svg",
+      "sha256": "a95fab67ff161c0e59407440bc7e998437b42a4ad470df0b7c78dbe422af78d6",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/nginx-light.svg"
+    },
+    "nginx-proxy-manager": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/nginx-proxy-manager.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/nginx-proxy-manager.svg",
+      "sha256": "17966ca4d32e04ec37b3d4e94d97d1e9e94ee2f184b431f56291b96deade32d1",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/nginx-proxy-manager-light.svg"
+    },
+    "pihole": {
+      "pack": "simple-icons",
+      "file": "icons/simple-icons/pihole.svg",
+      "license": "CC0-1.0",
+      "source": "https://cdn.jsdelivr.net/npm/simple-icons@16/icons/pihole.svg",
+      "sha256": "0e92d43e2dbc78808b76edb0648b228d50da1e75a794f5d7329eb820f5020823",
+      "multicolour": false
+    },
+    "tailscale": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/tailscale.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/tailscale.svg",
+      "sha256": "cd53d86b4bb3477c0b5ef304273b4645167eaf5741a4c9fb17d2bef98d7fa5f5",
+      "multicolour": false
+    },
+    "traefik": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/traefik.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/traefik.svg",
+      "sha256": "79a678cdba954205a7ee0e3d325920eef5cdd491e6b5a2c2f258ca588ac585a8",
+      "multicolour": false
+    },
+    "unbound": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/unbound.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/unbound.svg",
+      "sha256": "b5254c9839a3007dbd5078ec060e841a32cdb248b729f710e9db8efa49588f49",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/unbound-light.svg"
+    },
+    "wireguard": {
+      "pack": "selfhst",
+      "file": "icons/selfhst/wireguard.svg",
+      "license": "CC-BY-4.0",
+      "source": "https://raw.githubusercontent.com/selfhst/icons/main/svg/wireguard.svg",
+      "sha256": "2fb2cafe00cef76f3eaaa9fb3048edfd573a0c27f1730bef55777476d1f1c40b",
+      "multicolour": true,
+      "lightFile": "icons/selfhst/wireguard-light.svg"
+    },
+    "authelia": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/authelia.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/authelia.svg",
+      "sha256": "7d8dbf93f5eb0b22482df3f1801376a77563476bf8c50c2edc2b892c27fdf741",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/authelia-light.svg"
+    },
+    "authentik": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/authentik.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/authentik.svg",
+      "sha256": "db2cafa885914ab9b236859d3b31c04c29d187009a390ac14adb1f4755f75523",
+      "multicolour": false
+    },
+    "crowdsec": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/crowdsec.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/crowdsec.svg",
+      "sha256": "197ce866dabde2209100a386c2c1e9f48a92261f38e2be5fc35c762f97c9ab56",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/crowdsec-light.svg"
+    },
+    "alertmanager": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/alertmanager.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/alertmanager.svg",
+      "sha256": "7f23d48426d0096b1c1db1f011c17581800767e539dc0e74b237d291a02d60d2",
+      "multicolour": false
+    },
+    "cadvisor": {
+      "pack": "selfhst",
+      "file": "icons/selfhst/cadvisor.svg",
+      "license": "CC-BY-4.0",
+      "source": "https://raw.githubusercontent.com/selfhst/icons/main/svg/cadvisor.svg",
+      "sha256": "5d8ca34a263b9f762026c9456ad23bb2df801b49a6e5181bcdca81128f77daec",
+      "multicolour": true,
+      "lightFile": "icons/selfhst/cadvisor-light.svg"
+    },
+    "glances": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/glances.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/glances.svg",
+      "sha256": "87b9ccc0b929a6abaeaac28ef4d61b8c96d6c2f4721b60919b29bad6fe67c18e",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/glances-light.svg"
+    },
+    "gotify": {
+      "pack": "selfhst",
+      "file": "icons/selfhst/gotify.svg",
+      "license": "CC-BY-4.0",
+      "source": "https://raw.githubusercontent.com/selfhst/icons/main/svg/gotify.svg",
+      "sha256": "f10338c6b9e73dced6129fe348621648c53e48b8ac25daa12e7ca9719b98c051",
+      "multicolour": true,
+      "lightFile": "icons/selfhst/gotify-light.svg"
+    },
+    "grafana": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/grafana.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/grafana.svg",
+      "sha256": "08ca39564ba8ad89a0edeffe10b30c55b9f7c0c98dacf5d4865f3ca559e28f7b",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/grafana-light.svg"
+    },
+    "loki": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/loki.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/loki.svg",
+      "sha256": "52c148c82857c44e090bb99e9e37bdd1b1b422528608f84a6641226b01df74bb",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/loki-light.svg"
+    },
+    "node-exporter": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/node-exporter.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/prometheus.svg",
+      "sha256": "6576ef910bef97bb02185fad158a55190530e90cce6b5ff64464506347224fe5",
+      "multicolour": false
+    },
+    "ntfy": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/ntfy.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/ntfy.svg",
+      "sha256": "fd012905be9906f9ce92598f2a2c82c64f2ee1b2ebf72b1d5d594eaf65abc4f1",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/ntfy-light.svg"
+    },
+    "prometheus": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/prometheus.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/prometheus.svg",
+      "sha256": "6576ef910bef97bb02185fad158a55190530e90cce6b5ff64464506347224fe5",
+      "multicolour": false
+    },
+    "uptime-kuma": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/uptime-kuma.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/uptime-kuma.svg",
+      "sha256": "02af9ffd55aba6ce54e74c5d31146e4315eac6783ac283c24b0ca5cb94005242",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/uptime-kuma-light.svg"
+    },
+    "homarr": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/homarr.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/homarr.svg",
+      "sha256": "77043768a9a70dcc08e0fb9405c3280de960b64d54848d267e722ab8b195f14d",
+      "multicolour": false
+    },
+    "homepage": {
+      "pack": "selfhst",
+      "file": "icons/selfhst/homepage.svg",
+      "license": "CC-BY-4.0",
+      "source": "https://raw.githubusercontent.com/selfhst/icons/main/svg/homepage.svg",
+      "sha256": "aa0dd499b9a3c39057167de700a72c3e0f3fa8a11eb58f48298d5a028f34bf0c",
+      "multicolour": true,
+      "lightFile": "icons/selfhst/homepage-light.svg"
+    },
+    "argocd": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/argocd.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/argo-cd.svg",
+      "sha256": "3fd4f3939c42110cd3cd1d347a35bdb2ddf7002d1adbdee50237e2d0b7746797",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/argocd-light.svg"
+    },
+    "docker-registry": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/docker-registry.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/docker.svg",
+      "sha256": "f211ff249c107c6b2f76ade41297b6b6eb58c3fec677edf6cd5af6715ea5884d",
+      "multicolour": false
+    },
+    "gitea": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/gitea.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/gitea.svg",
+      "sha256": "58c2f9cd3906e9a4eae70ae14db05f2855ebc1bc967e794b8e5d012893f05346",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/gitea-light.svg"
+    },
+    "gitea-act-runner": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/gitea-act-runner.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/gitea.svg",
+      "sha256": "58c2f9cd3906e9a4eae70ae14db05f2855ebc1bc967e794b8e5d012893f05346",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/gitea-act-runner-light.svg"
+    },
+    "gitlab-runner": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/gitlab-runner.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/gitlab.svg",
+      "sha256": "0f243a11233fcc0bd15ab4636af3ddce9d9486019bfb896c7a48e3a6a1a9e21d",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/gitlab-runner-light.svg"
+    },
+    "jenkins": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/jenkins.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/jenkins.svg",
+      "sha256": "8228236c4b8855f5286282a2271b26e5c9de18bcaba045813733312151c8ee3c",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/jenkins-light.svg"
+    },
+    "portainer": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/portainer.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/portainer.svg",
+      "sha256": "9d75a45f16f2013e204ae9433e504f146055e05c77a892f69c17fad361d21b28",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/portainer-light.svg"
+    },
+    "watchtower": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/watchtower.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/watchtower.svg",
+      "sha256": "ac3f791285bea3c206b9d49e4269250bc4f5743e2e04eef30be374f889fa3146",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/watchtower-light.svg"
+    },
+    "cert-manager": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/cert-manager.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/cert-manager.svg",
+      "sha256": "1e55e449e96f7cd837686f83c8548801a60ccc66500030f9eb898aa8a7865af3",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/cert-manager-light.svg"
+    },
+    "ingress-nginx": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/ingress-nginx.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/nginx.svg",
+      "sha256": "a95fab67ff161c0e59407440bc7e998437b42a4ad470df0b7c78dbe422af78d6",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/ingress-nginx-light.svg"
+    },
+    "k3s-server": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/k3s-server.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/k3s.svg",
+      "sha256": "af458f2f1598e49a943b77e81c0451ded6a600f3d3fec5dbae83634e5d64a59e",
+      "multicolour": false
+    },
+    "longhorn": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/longhorn.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/longhorn.svg",
+      "sha256": "1999018228bbc5bfb9ad2e7c660f09eb5a4c363d18fe04b3cc39b0132be262bf",
+      "multicolour": false
+    },
+    "metallb": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/metallb.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/metallb.svg",
+      "sha256": "83e1fcc3b846c69241328a83ab3da846d4c1828e938955c52f059951d994b63e",
+      "multicolour": false
+    },
+    "openmediavault": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/openmediavault.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/openmediavault.svg",
+      "sha256": "8fd6ea125b35ce39624e5e52caa20b13e0cfe4d85c3cb93dab1eeb8a4da2a27a",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/openmediavault-light.svg"
+    },
+    "proxmox-ve-ui": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/proxmox-ve-ui.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/proxmox.svg",
+      "sha256": "3544eaf42ed3028e456d2bec7834e9b2717ae5c84fef9e35a26f5930825767d1",
+      "multicolour": false
+    },
+    "truenas-scale": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/truenas-scale.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/truenas-scale.svg",
+      "sha256": "01caf16fc20532da3d7ebf7d078b53eeda8cd550f62b456d0be0eaf9e50f520b",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/truenas-scale-light.svg"
+    },
+    "esphome": {
+      "pack": "selfhst",
+      "file": "icons/selfhst/esphome.svg",
+      "license": "CC-BY-4.0",
+      "source": "https://raw.githubusercontent.com/selfhst/icons/main/svg/esphome.svg",
+      "sha256": "94633775a1f4b99ae07bd33c43eeba388cc1f659ef17512d73c6f6da26ba2ba1",
+      "multicolour": true,
+      "lightFile": "icons/selfhst/esphome-light.svg"
+    },
+    "frigate": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/frigate.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/frigate.svg",
+      "sha256": "63e91d22183d54e15391c71cd5d769e8ed4a3b420fc659c0634314c34ec6fea6",
+      "multicolour": false
+    },
+    "home-assistant": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/home-assistant.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/home-assistant.svg",
+      "sha256": "1a2cfcbe438ee727d6923d827d8fc46ad6e3409fa625c183ac169e3d9380bfd2",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/home-assistant-light.svg"
+    },
+    "mosquitto": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/mosquitto.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/mosquitto.svg",
+      "sha256": "d9eaae825d8c08b6b79a0e10eddc6fb01811c5c37449b7ca3f91d287034ec9b7",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/mosquitto-light.svg"
+    },
+    "node-red": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/node-red.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/node-red.svg",
+      "sha256": "29c5165cb552d85cccf90190408f5e43cc4a86507d7472b1028a5e6e5236a41f",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/node-red-light.svg"
+    },
+    "zigbee2mqtt": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/zigbee2mqtt.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/zigbee2mqtt.svg",
+      "sha256": "1a116acbd68bf0e4563cb0bb237bd80458e84b258f24fa2268f6bb31a896438d",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/zigbee2mqtt-light.svg"
+    },
+    "bookstack": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/bookstack.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/bookstack.svg",
+      "sha256": "9cf0bf79102aaff9eec13b51834353a39fafb2c67e32524d705846b9517d826c",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/bookstack-light.svg"
+    },
+    "freshrss": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/freshrss.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/freshrss.svg",
+      "sha256": "4ca7be9076f315fdd8c3e0a038ffc8d8d9bc91832393be8e5cec6018e4fa8398",
+      "multicolour": false
+    },
+    "miniflux": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/miniflux.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/miniflux.svg",
+      "sha256": "26113c5271a2a75f047598a45be35b78bda652945fa0d9daf24f1aa5eafd5c06",
+      "multicolour": false
+    },
+    "vaultwarden": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/vaultwarden.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/vaultwarden.svg",
+      "sha256": "6c2715b392de67c8579c8c9e19df2c6c9b799e82906783cf8b6092116a6f45d1",
+      "multicolour": false
+    },
+    "borgmatic": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/borgmatic.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/borgmatic.svg",
+      "sha256": "951cb98e416a5cba65089226fd64b4b9d24a83fc5a97d2edb2c0e4bba852eabe",
+      "multicolour": false
+    },
+    "kopia": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/kopia.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/kopia.svg",
+      "sha256": "649dcebee37c2c4071e332fe2d45ad29c73511a48b4de70a05ec6c00c6b1d6d6",
+      "multicolour": false
+    },
+    "proxmox-backup-server": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/proxmox-backup-server.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/proxmox.svg",
+      "sha256": "3544eaf42ed3028e456d2bec7834e9b2717ae5c84fef9e35a26f5930825767d1",
+      "multicolour": false
+    },
+    "rclone": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/rclone.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/rclone.svg",
+      "sha256": "363a8202837b1de1d812455115f3f726598f9c0591dce4b4b5bd1040074edf82",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/rclone-light.svg"
+    },
+    "crafty-controller": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/crafty-controller.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/crafty-controller.svg",
+      "sha256": "5607626c3d484fa8e84a7f55d42c0162775bb1309589831d62c2057c4bb98a72",
+      "multicolour": true,
+      "lightFile": "icons/dashboard-icons/crafty-controller-light.svg"
+    },
+    "minecraft-server": {
+      "pack": "selfhst",
+      "file": "icons/selfhst/minecraft-server.svg",
+      "license": "CC-BY-4.0",
+      "source": "https://raw.githubusercontent.com/selfhst/icons/main/svg/minecraft.svg",
+      "sha256": "0ab548cda921edcfad9f2a0a1efbb11eb344a0183da3829d04eb193f3407e16b",
+      "multicolour": true,
+      "lightFile": "icons/selfhst/minecraft-server-light.svg"
+    },
+    "ollama": {
+      "pack": "dashboard-icons",
+      "file": "icons/dashboard-icons/ollama.svg",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/ollama.svg",
+      "sha256": "b3af758b9178e1e701a58c7f4d6032497aa6beb7d89ada286a0f115c468911b4",
+      "multicolour": false
+    },
+    "open-webui": {
+      "pack": "selfhst",
+      "file": "icons/selfhst/open-webui.svg",
+      "license": "CC-BY-4.0",
+      "source": "https://raw.githubusercontent.com/selfhst/icons/main/svg/open-webui.svg",
+      "sha256": "28cf52c490655dce3901fd9caf10c917b70a247d54195ea327e9f6a1f2db812e",
+      "multicolour": false
+    }
+  },
+  "missing": [
+    "dell-optiplex-micro",
+    "gpu-transcoder-box",
+    "intel-nuc",
+    "lenovo-thinkcentre-tiny",
+    "mini-pc",
+    "rack-server-1u",
+    "rack-server-2u",
+    "tower-server",
+    "workstation",
+    "zimaboard",
+    "lxc-container",
+    "virtual-machine",
+    "cloud-vm",
+    "internet",
+    "vps",
+    "access-point",
+    "isp-modem",
+    "isp-router",
+    "managed-switch",
+    "poe-switch",
+    "unmanaged-switch",
+    "usb-hdd",
+    "usb-ssd",
+    "smart-plug",
+    "ups",
+    "desktop-pc",
+    "game-console",
+    "gaming-laptop",
+    "iot-sensor",
+    "ip-camera",
+    "laptop",
+    "phone",
+    "smart-tv",
+    "tablet",
+    "zigbee-coordinator",
+    "tdarr",
+    "nfs-server",
+    "samba",
+    "wg-easy",
+    "wstunnel",
+    "gitlab-ce",
+    "yamtrack",
+    "restic-rest-server",
+    "custom-container",
+    "custom-systemd",
+    "custom-external"
+  ]
+}
