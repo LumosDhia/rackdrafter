@@ -1,0 +1,71 @@
+:root {
+  --bg: 40 20% 98%;
+  --surface: 0 0% 100%;
+  --surface-2: 40 16% 96%;
+  --surface-3: 40 12% 92%;
+  --border: 40 10% 90%;
+  --border-strong: 40 7% 78%;
+  --grid-dot: 40 9% 85%;
+  /* Brand logos are drawn for light surfaces; this tile stays near-white in both themes. */
+  --icon-tile: 0 0% 100%;
+  --fg: 30 8% 12%;
+  --fg-muted: 30 6% 33%;
+  --fg-subtle: 30 5% 42%;
+  --accent: 16 88% 52%;
+  --accent-fg: 0 0% 100%;
+  --accent-soft: 16 90% 95%;
+  --danger: 0 72% 48%;
+  --warning: 38 92% 30%;
+  --info: 212 80% 46%;
+  --ok: 150 60% 32%;
+  --link-ethernet: 30 6% 42%;
+  --link-wifi: 199 80% 42%;
+  --link-vpn: 265 55% 55%;
+  --link-proxy: 150 55% 34%;
+  --link-depends: 30 4% 60%;
+  --link-replicates: 185 70% 34%;
+  --link-backup: 330 60% 48%;
+  --link-mounts: 220 18% 44%;
+  --radius-xs: 3px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --shadow-sm: 0 1px 0 hsl(30 10% 10% / 0.04);
+  --shadow-md: 0 2px 6px -1px hsl(30 10% 10% / 0.08), 0 1px 2px hsl(30 10% 10% / 0.06);
+  --shadow-lg: 0 12px 32px -8px hsl(30 10% 10% / 0.18), 0 2px 6px hsl(30 10% 10% / 0.08);
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+.dark {
+  --bg: 30 6% 9%;
+  --surface: 30 5% 12%;
+  --surface-2: 30 5% 15%;
+  --surface-3: 30 5% 19%;
+  --border: 30 5% 21%;
+  --border-strong: 30 4% 31%;
+  --grid-dot: 30 5% 25%;
+  --icon-tile: 40 12% 95%;
+  --fg: 40 15% 92%;
+  --fg-muted: 35 7% 70%;
+  --fg-subtle: 35 6% 58%;
+  --accent: 18 92% 58%;
+  --accent-fg: 20 30% 8%;
+  --accent-soft: 18 60% 16%;
+  --danger: 0 80% 62%;
+  --warning: 42 95% 56%;
+  --info: 212 90% 66%;
+  --ok: 150 55% 52%;
+  --link-ethernet: 35 6% 62%;
+  --link-wifi: 199 85% 60%;
+  --link-vpn: 265 75% 72%;
+  --link-proxy: 150 55% 52%;
+  --link-depends: 35 5% 46%;
+  --link-replicates: 185 65% 52%;
+  --link-backup: 330 70% 66%;
+  --link-mounts: 220 20% 64%;
+  --shadow-sm: 0 1px 0 hsl(0 0% 0% / 0.35);
+  --shadow-md: 0 2px 6px -1px hsl(0 0% 0% / 0.5), 0 1px 2px hsl(0 0% 0% / 0.35);
+  --shadow-lg: 0 12px 32px -8px hsl(0 0% 0% / 0.5), 0 2px 6px hsl(0 0% 0% / 0.35);
+}

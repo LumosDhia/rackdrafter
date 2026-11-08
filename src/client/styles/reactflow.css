@@ -1,0 +1,67 @@
+@import '@xyflow/react/dist/style.css';
+
+.react-flow {
+  --xy-background-color: hsl(var(--bg));
+  background: hsl(var(--bg));
+}
+
+.react-flow__background pattern circle {
+  fill: hsl(var(--grid-dot));
+}
+
+.react-flow__minimap {
+  width: 200px !important;
+  height: 140px !important;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: hsl(var(--surface)) !important;
+}
+
+.react-flow__minimap-mask {
+  fill: hsl(var(--bg) / 0.7);
+}
+
+.react-flow__attribution {
+  display: none;
+}
+
+.react-flow__minimap-svg {
+  border-radius: calc(var(--radius-md) - 1px);
+}
+
+.react-flow__handle {
+  width: 8px;
+  height: 8px;
+  background: hsl(var(--surface));
+  border: 1px solid hsl(var(--border-strong));
+  opacity: 0;
+}
+
+.react-flow__node:hover .react-flow__handle,
+.react-flow__node.selected .react-flow__handle {
+  opacity: 1;
+}
+
+.node-shell {
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease,
+    background-color 120ms ease;
+}
+
+.react-flow__node:hover .node-shell {
+  border-color: hsl(var(--border-strong));
+  box-shadow: var(--shadow-md);
+}
+
+.react-flow__node.selected .node-shell {
+  border-color: hsl(var(--accent));
+  box-shadow:
+    0 0 0 1px hsl(var(--accent)),
+    0 0 0 4px hsl(var(--accent) / 0.14);
+}
+
+.react-flow__edge.selected path {
+  stroke: hsl(var(--accent));
+}
