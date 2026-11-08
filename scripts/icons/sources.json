@@ -1,0 +1,40 @@
+{
+  "$comment": "Icon sources for rackdrafter. Licences verified from each repository's LICENSE file (see THIRD_PARTY_NOTICES.md). Do not add a source without recording its SPDX id.",
+  "packs": {
+    "dashboard-icons": {
+      "repo": "homarr-labs/dashboard-icons",
+      "ref": "main",
+      "dir": "svg",
+      "license": "Apache-2.0",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/{ref}/{dir}/{name}.svg",
+      "homepage": "https://github.com/homarr-labs/dashboard-icons",
+      "attribution": "App logos from homarr-labs/dashboard-icons (Apache-2.0)."
+    },
+    "selfhst": {
+      "repo": "selfhst/icons",
+      "ref": "main",
+      "dir": "svg",
+      "license": "CC-BY-4.0",
+      "url": "https://raw.githubusercontent.com/selfhst/icons/{ref}/{dir}/{name}.svg",
+      "homepage": "https://github.com/selfhst/icons",
+      "attribution": "App logos from selfh.st/icons (CC BY 4.0)."
+    },
+    "simple-icons": {
+      "repo": "simple-icons/simple-icons",
+      "ref": "16",
+      "dir": "icons",
+      "license": "CC0-1.0",
+      "url": "https://cdn.jsdelivr.net/npm/simple-icons@{ref}/{dir}/{name}.svg",
+      "homepage": "https://github.com/simple-icons/simple-icons",
+      "attribution": "Brand marks from Simple Icons (CC0-1.0)."
+    }
+  },
+  "order": ["dashboard-icons", "selfhst", "simple-icons"],
+  "glyphPack": {
+    "name": "tabler",
+    "license": "MIT",
+    "version": "3.x",
+    "homepage": "https://github.com/tabler/tabler-icons",
+    "attribution": "Interface and device glyphs from Tabler Icons (MIT, (c) Pawel Kuna)."
+  }
+}
