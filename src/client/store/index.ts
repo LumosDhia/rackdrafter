@@ -8,6 +8,8 @@ enablePatches();
 
 export interface Command {
   label: string;
+  // dragging fires this on every frame, same key within a second = one undo step
+  coalesceKey?: string;
   run: (draft: Project) => void;
 }
 
@@ -15,6 +17,8 @@ interface HistoryEntry {
   label: string;
   patches: Patch[];
   inverse: Patch[];
+  coalesceKey: string | null;
+  at: number;
 }
 
 interface State {
@@ -39,11 +43,28 @@ export const useAppStore = create<State>((set, get) => ({
       cmd.run(draft as Project);
     });
     if (patches.length === 0) return;
-    set((s) => ({
-      project: next,
-      past: [...s.past, { label: cmd.label, patches, inverse }],
-      future: [],
-    }));
+    const at = Date.now();
+    set((s) => {
+      const top = s.past[s.past.length - 1];
+      if (cmd.coalesceKey && top && top.coalesceKey === cmd.coalesceKey && at - top.at < 1000) {
+        // inverse has to run newest first, so the new inverse goes in front
+        const merged = {
+          ...top,
+          patches: [...top.patches, ...patches],
+          inverse: [...inverse, ...top.inverse],
+          at,
+        };
+        return { project: next, past: [...s.past.slice(0, -1), merged], future: [] };
+      }
+      return {
+        project: next,
+        past: [
+          ...s.past,
+          { label: cmd.label, patches, inverse, coalesceKey: cmd.coalesceKey ?? null, at },
+        ],
+        future: [],
+      };
+    });
   },
 
   undo: () => {
