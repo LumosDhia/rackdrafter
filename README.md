@@ -3,4 +3,5 @@ drag and drop homelab designer, wip
 
 ## run
 
-npm i && npm run dev
+npm ci
+npm run dev   # needs node 22
