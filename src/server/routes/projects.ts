@@ -1,5 +1,10 @@
 import type { FastifyInstance } from 'fastify';
 import { emptyProject } from '#shared/domain/defaults.ts';
+import { ProjectSchema } from '#shared/domain/schema.ts';
+import { clock } from '#shared/domain/clock.ts';
+import { projects as projectsTable } from '../db/schema.ts';
+import { eq } from 'drizzle-orm';
+import { getProjectRow } from '../db/repo/projects.ts';
 import type { Db } from '../db/client.ts';
 import {
   assignNewIdentity,
@@ -43,5 +48,30 @@ export async function registerProjects(app: FastifyInstance, db: Db): Promise<vo
     const { document } = getProject(db, id);
     const copy = assignNewIdentity(document, `${document.name} copy`);
     return reply.code(201).send(insertProject(db, copy, 'manual', 'Duplicated'));
+  });
+
+  app.put('/api/projects/:id/document', async (req, reply) => {
+    const { id } = req.params as { id: string };
+    const body = req.body as { baseSeq: number; document: unknown };
+    const row = getProjectRow(db, id);
+    if (!row) return reply.code(404).send({ error: 'not found' });
+    // two tabs open on the same project overwrote each other, so compare seq first
+    if (body.baseSeq !== row.docSeq) {
+      return reply.code(409).send({ error: 'stale baseSeq', current: getProject(db, id) });
+    }
+    const document = ProjectSchema.parse(body.document); // throws -> 500, fix later
+    console.log('put document', id, 'seq', row.docSeq, 'nodes', document.nodes.length);
+    const nextSeq = row.docSeq + 1;
+    db.update(projectsTable)
+      .set({
+        name: document.name,
+        document: JSON.stringify(document),
+        docSeq: nextSeq,
+        nodeCount: document.nodes.length,
+        updatedAt: clock.now(),
+      })
+      .where(eq(projectsTable.id, id))
+      .run();
+    return { docSeq: nextSeq };
   });
 }
