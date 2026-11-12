@@ -135,6 +135,22 @@ function addressRules(project: Project): Draft[] {
     }
   }
 
+  const tailnet = project.subnets.find((s) => s.purpose === 'vpn-overlay' && s.cidr.startsWith('100.'));
+  if (tailnet) {
+    const attackers = hosts(project).filter(
+      (d) => !d.spec.nics.some((n) => n.kind === 'tunnel') && d.spec.role === 'vps',
+    );
+    if (attackers.length > 0 && !project.links.some((l) => l.kind === 'vpn-tunnel')) {
+      out.push({
+        ruleId: 'NET006',
+        severity: 'info',
+        title: 'Overlay declared but unused',
+        message: `${tailnet.name} exists but no VPN tunnel uses it.`,
+        subjects: attackers.map((d) => d.id),
+      });
+    }
+  }
+
   return out;
 }
 
@@ -269,12 +285,184 @@ function resourceRules(project: Project): Draft[] {
   return out;
 }
 
+// ------------------------------------------------------------ reliability rules
+
+function reliabilityRules(project: Project): Draft[] {
+  const out: Draft[] = [];
+
+  // Backup coverage: data-bearing services with no backup or replication link.
+  for (const service of services(project)) {
+    const stateful =
+      service.spec.volumes.some((v) => v.class === 'data' || v.class === 'database') ||
+      service.spec.capabilities.includes('database');
+    if (!stateful) continue;
+    const covered = project.links.some(
+      (l) => (l.kind === 'backup-to' || l.kind === 'replicates-to') && l.source === service.id,
+    );
+    if (!covered) {
+      out.push({
+        ruleId: 'BAK001',
+        severity: 'warning',
+        title: 'No backup',
+        message: `${service.label} stores data but nothing backs it up.`,
+        subjects: [service.id],
+      });
+    }
+  }
+
+  // Public exposure of administrative interfaces without an auth layer.
+  const nodes = nodeById(project);
+  for (const link of project.links) {
+    if (link.kind !== 'reverse-proxy') continue;
+    if (!link.attrs.tls) continue;
+    const target = nodes.get(link.target);
+    if (!target || target.kind !== 'service') continue;
+    if (!target.spec.adminUi) continue;
+    if (link.attrs.auth !== 'none') continue;
+    out.push({
+      ruleId: 'EXP001',
+      severity: 'warning',
+      title: 'Admin UI published without auth',
+      message: `${target.label} is public at ${link.attrs.hostname} with no authentication layer.`,
+      subjects: [link.target, target.id],
+    });
+  }
+
+  // A host with a single network path is a single point of failure.
+  for (const device of hosts(project)) {
+    if (device.spec.role === 'ups' || device.spec.role === 'internet') continue;
+    const links = project.links.filter(
+      (l) =>
+        (l.source === device.id || l.target === device.id) && (l.kind === 'ethernet' || l.kind === 'wifi'),
+    );
+    if (links.length === 1) {
+      out.push({
+        ruleId: 'IMP001',
+        severity: 'info',
+        title: 'Single network path',
+        message: `${device.label} has one cable or radio link; losing it disconnects the device.`,
+        subjects: [device.id],
+      });
+    }
+  }
+
+  // Dependency cycles are almost always a modelling mistake.
+  const edges = new Map<string, string[]>();
+  for (const l of project.links) {
+    if (l.kind !== 'depends-on' || !l.attrs.hard) continue;
+    edges.set(l.source, [...(edges.get(l.source) ?? []), l.target]);
+  }
+  const state = new Map<string, 'visiting' | 'done'>();
+  const cycles: string[][] = [];
+  const walk = (id: string, path: string[]): void => {
+    const s = state.get(id);
+    if (s === 'done') return;
+    if (s === 'visiting') {
+      cycles.push([...path.slice(path.indexOf(id)), id]);
+      return;
+    }
+    state.set(id, 'visiting');
+    for (const next of edges.get(id) ?? []) walk(next, [...path, id]);
+    state.set(id, 'done');
+  };
+  for (const id of edges.keys()) walk(id, []);
+  for (const cycle of cycles.slice(0, 3)) {
+    out.push({
+      ruleId: 'CYC001',
+      severity: 'error',
+      title: 'Dependency cycle',
+      message: `Hard dependencies form a cycle: ${cycle.map((id) => nodes.get(id)?.label ?? id).join(' → ')}.`,
+      subjects: cycle,
+    });
+  }
+
+  // Image hygiene.
+  for (const service of services(project)) {
+    if (service.spec.image && /:latest$|^[^:]+$/.test(service.spec.image)) {
+      out.push({
+        ruleId: 'SVC002',
+        severity: 'info',
+        title: 'Unpinned image',
+        message: `${service.label} uses an unpinned tag; a redeploy may change behaviour.`,
+        subjects: [service.id],
+      });
+    }
+    if (service.status === 'broken') {
+      out.push({
+        ruleId: 'SVC003',
+        severity: 'warning',
+        title: 'Service marked broken',
+        message: `${service.label} is recorded as broken.`,
+        subjects: [service.id],
+      });
+    }
+  }
+
+  return out;
+}
+
+/** WAN exposure: which services are reachable from the internet through a proxy or port forward. */
+export function wanExposure(project: Project): { hostname: string; serviceId: string; via: string }[] {
+  const nodes = nodeById(project);
+  const out: { hostname: string; serviceId: string; via: string }[] = [];
+  for (const link of project.links) {
+    if (link.kind !== 'reverse-proxy') continue;
+    const proxy = nodes.get(link.source);
+    out.push({
+      hostname: link.attrs.hostname,
+      serviceId: link.target,
+      via: proxy?.label ?? link.source,
+    });
+  }
+  return out.sort((a, b) => a.hostname.localeCompare(b.hostname));
+}
+
+/** Cheap cost model: purchase amortisation, power draw, and the project's tariff. */
+export function costSummary(project: Project): {
+  purchase: number;
+  monthlyPower: number;
+  monthlyTotal: number;
+  watts: number;
+  kwhPerMonth: number;
+} {
+  const { electricityPricePerKwh, averageLoadFactor, amortizeMonths } = project.settings;
+  let watts = 0;
+  let purchase = 0;
+  let amort = 0;
+  for (const device of hosts(project)) {
+    if (device.placement.kind === 'guest') continue;
+    const idle = device.spec.power.idleW;
+    const max = device.spec.power.maxW;
+    watts += idle + (max - idle) * averageLoadFactor;
+    const price = device.spec.cost.purchase ?? 0;
+    purchase += price;
+    const months = device.spec.cost.amortizeMonths ?? amortizeMonths;
+    if (price > 0 && months > 0) amort += price / months;
+  }
+  const kwhPerMonth = (watts * 24 * 30.4375) / 1000;
+  const monthlyPower = kwhPerMonth * electricityPricePerKwh;
+  return {
+    purchase,
+    monthlyPower: Math.round(monthlyPower * 100) / 100,
+    monthlyTotal: Math.round((monthlyPower + amort) * 100) / 100,
+    watts: Math.round(watts),
+    kwhPerMonth: Math.round(kwhPerMonth * 10) / 10,
+  };
+}
+
 /**
- * Runs the rules. no ordering yet.
+ * Runs every rule. Order is whatever the rules produce for now.
  */
 export function analyze(project: Project): AnalysisResult {
-  const drafts = [...addressRules(project), ...portRules(project), ...resourceRules(project)];
+  const drafts = [
+    ...addressRules(project),
+    ...portRules(project),
+    ...resourceRules(project),
+    ...reliabilityRules(project),
+  ];
   const findings = drafts.map(finding);
-  console.log('analyze', findings.length);
+  console.log('analyze', findings.length, 'findings');
   return { findings };
 }
+
+export type { Link };
