@@ -557,18 +557,302 @@ export const ProjectSettingsSchema: z.ZodType<ProjectSettings> = z.strictObject(
   snapToGrid: z.boolean(),
 });
 
-export const ProjectSchema: z.ZodType<Project> = z.strictObject({
-  schemaVersion: z.literal(CURRENT_SCHEMA_VERSION),
-  id: z.string().min(1),
-  name: z.string().min(1).max(80),
-  description: z.string(),
-  createdAt: iso8601,
-  updatedAt: iso8601,
-  settings: ProjectSettingsSchema,
-  nodes: z.array(CanvasNodeSchema),
-  links: z.array(LinkSchema),
-  subnets: z.array(SubnetSchema),
-  clusters: z.array(K8sClusterSchema),
-  dnsZones: z.array(DnsZoneSchema),
-  viewport: z.strictObject({ x: z.number(), y: z.number(), zoom: z.number() }),
-});
+function addIssue(ctx: z.RefinementCtx, path: (string | number)[], message: string): void {
+  ctx.addIssue({ code: 'custom', path, message });
+}
+
+function uniqueIds(ids: string[]): string | null {
+  const seen = new Set<string>();
+  for (const id of ids) {
+    if (seen.has(id)) return id;
+    seen.add(id);
+  }
+  return null;
+}
+
+export const ProjectSchema: z.ZodType<Project> = z
+  .strictObject({
+    schemaVersion: z.literal(CURRENT_SCHEMA_VERSION),
+    id: z.string().min(1),
+    name: z.string().min(1).max(80),
+    description: z.string(),
+    createdAt: iso8601,
+    updatedAt: iso8601,
+    settings: ProjectSettingsSchema,
+    nodes: z.array(CanvasNodeSchema),
+    links: z.array(LinkSchema),
+    subnets: z.array(SubnetSchema),
+    clusters: z.array(K8sClusterSchema),
+    dnsZones: z.array(DnsZoneSchema),
+    viewport: z.strictObject({ x: z.number(), y: z.number(), zoom: z.number() }),
+  })
+  .superRefine((project, ctx) => {
+    const nodeDup = uniqueIds(project.nodes.map((n) => n.id));
+    if (nodeDup) addIssue(ctx, ['nodes'], `duplicate node id ${nodeDup}`);
+    const linkDup = uniqueIds(project.links.map((l) => l.id));
+    if (linkDup) addIssue(ctx, ['links'], `duplicate link id ${linkDup}`);
+    const subnetDup = uniqueIds(project.subnets.map((s) => s.id));
+    if (subnetDup) addIssue(ctx, ['subnets'], `duplicate subnet id ${subnetDup}`);
+    const clusterDup = uniqueIds(project.clusters.map((c) => c.id));
+    if (clusterDup) addIssue(ctx, ['clusters'], `duplicate cluster id ${clusterDup}`);
+    const zoneDup = uniqueIds(project.dnsZones.map((z) => z.id));
+    if (zoneDup) addIssue(ctx, ['dnsZones'], `duplicate zone id ${zoneDup}`);
+
+    const nodes = new Map(project.nodes.map((n) => [n.id, n]));
+    const subnets = new Set(project.subnets.map((s) => s.id));
+    const clusters = new Set(project.clusters.map((c) => c.id));
+
+    const nicIds = new Set<string>();
+    const storageIds = new Set<string>();
+    const gpuIds = new Set<string>();
+    const portIds = new Set<string>();
+    const volumeIds = new Set<string>();
+
+    for (const node of project.nodes) {
+      if (node.kind === 'device') {
+        for (const nic of node.spec.nics) nicIds.add(nic.id);
+        for (const st of node.spec.storage) storageIds.add(st.id);
+        for (const g of node.spec.gpus) gpuIds.add(g.id);
+      }
+      if (node.kind === 'service') {
+        for (const p of node.spec.ports) portIds.add(p.id);
+        for (const v of node.spec.volumes) volumeIds.add(v.id);
+      }
+    }
+
+    const networkBySubnet = new Map<string, string[]>();
+    const parentOf = new Map<string, string>();
+
+    for (const [i, node] of project.nodes.entries()) {
+      if (node.kind === 'network') {
+        const list = networkBySubnet.get(node.subnetId) ?? [];
+        list.push(node.id);
+        networkBySubnet.set(node.subnetId, list);
+        if (!subnets.has(node.subnetId)) {
+          addIssue(ctx, ['nodes', i, 'subnetId'], `unknown subnet ${node.subnetId}`);
+        }
+      }
+
+      if (node.kind === 'device' && node.placement.kind === 'guest') {
+        const host = nodes.get(node.placement.hostId);
+        if (!host) {
+          addIssue(ctx, ['nodes', i, 'placement', 'hostId'], `unknown host ${node.placement.hostId}`);
+        } else if (host.kind !== 'device') {
+          addIssue(ctx, ['nodes', i, 'placement', 'hostId'], 'guest host must be a device');
+        } else if (host.spec.role !== 'hypervisor') {
+          addIssue(ctx, ['nodes', i, 'placement', 'hostId'], 'guest on non-hypervisor');
+        } else {
+          parentOf.set(node.id, host.id);
+        }
+        if (node.groupId !== null) {
+          addIssue(ctx, ['nodes', i, 'groupId'], 'hosted node must have groupId null');
+        }
+      }
+
+      if (node.kind === 'service' && node.placement.kind === 'host') {
+        const host = nodes.get(node.placement.hostId);
+        if (!host) {
+          addIssue(ctx, ['nodes', i, 'placement', 'hostId'], `unknown host ${node.placement.hostId}`);
+        } else if (host.kind !== 'device') {
+          addIssue(ctx, ['nodes', i, 'placement', 'hostId'], 'service placed on a non-device');
+        } else {
+          parentOf.set(node.id, host.id);
+        }
+        if (node.groupId !== null) {
+          addIssue(ctx, ['nodes', i, 'groupId'], 'hosted node must have groupId null');
+        }
+      }
+
+      if (node.kind === 'service' && node.placement.kind === 'cluster') {
+        if (!clusters.has(node.placement.clusterId)) {
+          addIssue(
+            ctx,
+            ['nodes', i, 'placement', 'clusterId'],
+            `unknown cluster ${node.placement.clusterId}`,
+          );
+        }
+      }
+
+      if (node.groupId !== null && !nodes.has(node.groupId)) {
+        addIssue(ctx, ['nodes', i, 'groupId'], `unknown group ${node.groupId}`);
+      }
+
+      if (node.kind === 'device') {
+        for (const [si, st] of node.spec.storage.entries()) {
+          if (st.backing) {
+            if (!nodes.has(st.backing.deviceId)) {
+              addIssue(
+                ctx,
+                ['nodes', i, 'spec', 'storage', si, 'backing', 'deviceId'],
+                'unknown backing device',
+              );
+            }
+            if (!storageIds.has(st.backing.storageId)) {
+              addIssue(
+                ctx,
+                ['nodes', i, 'spec', 'storage', si, 'backing', 'storageId'],
+                'unknown backing storage',
+              );
+            }
+          }
+        }
+        for (const [gi, gp] of node.spec.gpuPassthrough.entries()) {
+          if (!nodes.has(gp.deviceId)) {
+            addIssue(ctx, ['nodes', i, 'spec', 'gpuPassthrough', gi, 'deviceId'], 'unknown GPU device');
+          }
+          if (!gpuIds.has(gp.gpuId)) {
+            addIssue(ctx, ['nodes', i, 'spec', 'gpuPassthrough', gi, 'gpuId'], 'unknown GPU');
+          }
+        }
+        for (const [ni, nic] of node.spec.nics.entries()) {
+          if (nic.subnetId && !subnets.has(nic.subnetId)) {
+            addIssue(ctx, ['nodes', i, 'spec', 'nics', ni, 'subnetId'], `unknown subnet ${nic.subnetId}`);
+          }
+        }
+        for (const [fi, fw] of node.spec.portForwards.entries()) {
+          if (!nicIds.has(fw.wanNicId)) {
+            addIssue(ctx, ['nodes', i, 'spec', 'portForwards', fi, 'wanNicId'], 'unknown NIC');
+          }
+          if (!nodes.has(fw.targetNodeId)) {
+            addIssue(ctx, ['nodes', i, 'spec', 'portForwards', fi, 'targetNodeId'], 'unknown target');
+          }
+        }
+      }
+
+      if (node.kind === 'service') {
+        for (const [vi, vol] of node.spec.volumes.entries()) {
+          if (vol.storageRef) {
+            if (!nodes.has(vol.storageRef.deviceId)) {
+              addIssue(
+                ctx,
+                ['nodes', i, 'spec', 'volumes', vi, 'storageRef', 'deviceId'],
+                'unknown storage device',
+              );
+            }
+            if (!storageIds.has(vol.storageRef.storageId)) {
+              addIssue(
+                ctx,
+                ['nodes', i, 'spec', 'volumes', vi, 'storageRef', 'storageId'],
+                'unknown storage',
+              );
+            }
+          }
+        }
+        for (const [ni, net] of node.spec.networks.entries()) {
+          if (!subnets.has(net)) {
+            addIssue(ctx, ['nodes', i, 'spec', 'networks', ni], `unknown subnet ${net}`);
+          }
+        }
+      }
+    }
+
+    for (const [subnetIdValue, ids] of networkBySubnet) {
+      if (ids.length > 1) {
+        addIssue(ctx, ['nodes'], `two network nodes for one subnet ${subnetIdValue}`);
+      }
+    }
+
+    for (const node of project.nodes) {
+      let depth = 0;
+      let cur: string | undefined = parentOf.get(node.id);
+      const seen = new Set<string>([node.id]);
+      while (cur) {
+        depth += 1;
+        if (seen.has(cur)) {
+          addIssue(ctx, ['nodes'], `containment cycle involving ${node.id}`);
+          break;
+        }
+        if (depth > 3) {
+          addIssue(ctx, ['nodes'], `host chain deeper than 3 for ${node.id}`);
+          break;
+        }
+        seen.add(cur);
+        cur = parentOf.get(cur);
+      }
+    }
+
+    for (const [i, link] of project.links.entries()) {
+      if (!nodes.has(link.source)) {
+        addIssue(ctx, ['links', i, 'source'], `unknown node ${link.source}`);
+      }
+      if (!nodes.has(link.target)) {
+        addIssue(ctx, ['links', i, 'target'], `unknown node ${link.target}`);
+      }
+      if (link.kind === 'ethernet' || link.kind === 'wifi') {
+        const a = link.attrs;
+        if (a.sourceNicId && !nicIds.has(a.sourceNicId)) {
+          addIssue(ctx, ['links', i, 'attrs', 'sourceNicId'], 'unknown NIC');
+        }
+        if (a.targetNicId && !nicIds.has(a.targetNicId)) {
+          addIssue(ctx, ['links', i, 'attrs', 'targetNicId'], 'unknown NIC');
+        }
+      }
+      if (
+        link.kind === 'vpn-tunnel' &&
+        link.attrs.overlaySubnetId &&
+        !subnets.has(link.attrs.overlaySubnetId)
+      ) {
+        addIssue(ctx, ['links', i, 'attrs', 'overlaySubnetId'], 'unknown subnet');
+      }
+      if (link.kind === 'reverse-proxy' && !portIds.has(link.attrs.targetPortId)) {
+        addIssue(ctx, ['links', i, 'attrs', 'targetPortId'], 'unknown port');
+      }
+      if (
+        link.kind === 'replicates-to' &&
+        link.attrs.targetStorageId &&
+        !storageIds.has(link.attrs.targetStorageId)
+      ) {
+        addIssue(ctx, ['links', i, 'attrs', 'targetStorageId'], 'unknown storage');
+      }
+      if (link.kind === 'backup-to') {
+        if (link.attrs.targetStorageId && !storageIds.has(link.attrs.targetStorageId)) {
+          addIssue(ctx, ['links', i, 'attrs', 'targetStorageId'], 'unknown storage');
+        }
+        for (const [vi, vid] of link.attrs.volumeIds.entries()) {
+          if (!volumeIds.has(vid)) addIssue(ctx, ['links', i, 'attrs', 'volumeIds', vi], 'unknown volume');
+        }
+      }
+      if (link.kind === 'mounts' && link.attrs.storageId && !storageIds.has(link.attrs.storageId)) {
+        addIssue(ctx, ['links', i, 'attrs', 'storageId'], 'unknown storage');
+      }
+    }
+
+    for (const [i, subnet] of project.subnets.entries()) {
+      if (subnet.scope.kind === 'host' && !nodes.has(subnet.scope.hostId)) {
+        addIssue(ctx, ['subnets', i, 'scope', 'hostId'], 'unknown host');
+      }
+      if (subnet.scope.kind === 'cluster' && !clusters.has(subnet.scope.clusterId)) {
+        addIssue(ctx, ['subnets', i, 'scope', 'clusterId'], 'unknown cluster');
+      }
+      if (subnet.siteGroupId && !nodes.has(subnet.siteGroupId)) {
+        addIssue(ctx, ['subnets', i, 'siteGroupId'], 'unknown site group');
+      }
+      if (subnet.gateway) {
+        try {
+          const c = parseCidr(subnet.cidr);
+          const { parseIpv4 } = {
+            parseIpv4: (ip: string) => {
+              const p = ip.split('.').map(Number);
+              return (((p[0] ?? 0) << 24) | ((p[1] ?? 0) << 16) | ((p[2] ?? 0) << 8) | (p[3] ?? 0)) >>> 0;
+            },
+          };
+          void c;
+          void parseIpv4;
+        } catch {
+          /* cidr already validated */
+        }
+      }
+    }
+
+    for (const [i, cluster] of project.clusters.entries()) {
+      for (const [ni, nid] of cluster.nodeIds.entries()) {
+        if (!nodes.has(nid)) addIssue(ctx, ['clusters', i, 'nodeIds', ni], `unknown node ${nid}`);
+      }
+      if (!subnets.has(cluster.podSubnetId)) {
+        addIssue(ctx, ['clusters', i, 'podSubnetId'], 'unknown subnet');
+      }
+      if (!subnets.has(cluster.serviceSubnetId)) {
+        addIssue(ctx, ['clusters', i, 'serviceSubnetId'], 'unknown subnet');
+      }
+    }
+  });
