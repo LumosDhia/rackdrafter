@@ -3,6 +3,8 @@ import { cidrContains, isIpv4, overlaps, parseCidr } from '../lib/net/ipv4.ts';
 import { nodeById } from '../domain/selectors.ts';
 import type { AnalysisResult, Finding, Severity } from './types.ts';
 
+const SEVERITY_ORDER: Record<Severity, number> = { error: 0, warning: 1, info: 2 };
+
 interface Draft {
   ruleId: string;
   severity: Severity;
@@ -451,7 +453,8 @@ export function costSummary(project: Project): {
 }
 
 /**
- * Runs every rule. Order is whatever the rules produce for now.
+ * Runs every rule and returns a deterministically ordered result: errors first, then warnings,
+ * then info, each group sorted by rule id and subject. Pure function.
  */
 export function analyze(project: Project): AnalysisResult {
   const drafts = [
@@ -460,9 +463,24 @@ export function analyze(project: Project): AnalysisResult {
     ...resourceRules(project),
     ...reliabilityRules(project),
   ];
-  const findings = drafts.map(finding);
-  console.log('analyze', findings.length, 'findings');
+  const disabled = new Set(project.settings.disabledRules);
+  const findings = drafts
+    .filter((d) => !disabled.has(d.ruleId))
+    .map(finding)
+    .sort(
+      (a, b) =>
+        SEVERITY_ORDER[a.severity] - SEVERITY_ORDER[b.severity] ||
+        a.ruleId.localeCompare(b.ruleId) ||
+        a.subjects.join(',').localeCompare(b.subjects.join(',')) ||
+        a.title.localeCompare(b.title),
+    );
   return { findings };
+}
+
+export function findingCounts(result: AnalysisResult): Record<Severity, number> {
+  const counts: Record<Severity, number> = { error: 0, warning: 0, info: 0 };
+  for (const f of result.findings) counts[f.severity] += 1;
+  return counts;
 }
 
 export type { Link };
