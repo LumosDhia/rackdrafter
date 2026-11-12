@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "id": "proj_minimal01",
+  "name": "Minimal",
+  "description": "",
+  "createdAt": "2020-01-01T00:00:00.000Z",
+  "updatedAt": "2020-01-01T00:00:00.000Z",
+  "settings": {
+    "currency": "EUR",
+    "electricityPricePerKwh": 0.2,
+    "averageLoadFactor": 0.25,
+    "amortizeMonths": 36,
+    "thresholds": {
+      "ramWarn": 0.85,
+      "ramError": 1,
+      "cpuInfo": 1,
+      "cpuWarn": 4,
+      "diskWarn": 0.9,
+      "diskError": 1,
+      "subnetWarn": 0.9,
+      "upsWarn": 0.8
+    },
+    "timezone": "UTC",
+    "disabledRules": [],
+    "snapToGrid": true
+  },
+  "nodes": [
+    {
+      "id": "n_mini00001",
+      "kind": "device",
+      "label": "Mini PC",
+      "position": { "x": 40, "y": 40 },
+      "size": null,
+      "groupId": null,
+      "status": "running",
+      "notes": "",
+      "tags": [],
+      "locked": false,
+      "catalogSlug": "mini-pc",
+      "expanded": false,
+      "placement": { "kind": "physical" },
+      "spec": {
+        "role": "server",
+        "formFactor": "mini-pc",
+        "hostname": "mini",
+        "fqdn": null,
+        "vendor": null,
+        "model": null,
+        "os": null,
+        "cpu": { "model": null, "cores": 4, "threads": 8, "arch": "x86_64" },
+        "ramMb": 16384,
+        "reservedRamMb": 512,
+        "storage": [],
+        "gpus": [],
+        "gpuPassthrough": [],
+        "nics": [
+          {
+            "id": "i_eth000001",
+            "name": "eth0",
+            "kind": "ethernet",
+            "subnetId": null,
+            "ip": null,
+            "dhcp": true,
+            "reserved": false,
+            "mac": null,
+            "vlan": null,
+            "speedMbps": 1000,
+            "primary": true,
+            "publicIp": false
+          }
+        ],
+        "power": { "idleW": 8, "maxW": 35, "upsCapacityW": null, "upsBatteryWh": null },
+        "cost": { "purchase": null, "monthly": null, "amortizeMonths": null },
+        "rackUnits": 0,
+        "firewall": { "enabled": false, "defaultInbound": "allow", "rules": [] },
+        "advertisedRoutes": [],
+        "portForwards": []
+      }
+    }
+  ],
+  "links": [],
+  "subnets": [],
+  "clusters": [],
+  "dnsZones": [],
+  "viewport": { "x": 0, "y": 0, "zoom": 1 }
+}

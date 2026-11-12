@@ -1,0 +1,32 @@
+{
+  "id": "proj_v0fixture0",
+  "name": "Legacy",
+  "description": "",
+  "createdAt": "2020-01-01T00:00:00.000Z",
+  "updatedAt": "2020-01-01T00:00:00.000Z",
+  "settings": {
+    "currency": "EUR",
+    "electricityPricePerKwh": 0.2,
+    "averageLoadFactor": 0.25,
+    "amortizeMonths": 36,
+    "thresholds": {
+      "ramWarn": 0.85,
+      "ramError": 1,
+      "cpuInfo": 1,
+      "cpuWarn": 4,
+      "diskWarn": 0.9,
+      "diskError": 1,
+      "subnetWarn": 0.9,
+      "upsWarn": 0.8
+    },
+    "timezone": "UTC",
+    "disabledRules": [],
+    "snapToGrid": true
+  },
+  "nodes": [],
+  "links": [],
+  "subnets": [],
+  "clusters": [],
+  "dnsZones": [],
+  "viewport": { "x": 0, "y": 0, "zoom": 1 }
+}

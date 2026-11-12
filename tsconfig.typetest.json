@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.shared.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "noEmit": true,
+    "composite": false,
+    "rootDir": ".",
+    "outDir": "./dist/typetest"
+  },
+  "include": ["src/shared/**/*.ts", "src/**/*.typetest.ts"]
+}
