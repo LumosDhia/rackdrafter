@@ -7,10 +7,8 @@ test('canvas basics', async ({ page }) => {
   await dropFromPalette(page, 'mini-pc', { x: 220, y: 220 });
   await expect(nodeByLabel(page, 'Mini PC')).toBeVisible();
   await page.keyboard.press('F2');
-  await page.waitForTimeout(300);
   await page.getByLabel('Node label').fill('nuc-1');
-  await page.mouse.click(20, 20);
-  await page.waitForTimeout(300);
+  await page.getByTestId('canvas').click({ position: { x: 20, y: 20 } });
   await expect(nodeByLabel(page, 'nuc-1')).toBeVisible();
   await page.keyboard.press('Control+z');
   await expect(nodeByLabel(page, 'Mini PC')).toBeVisible();

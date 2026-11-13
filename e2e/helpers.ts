@@ -7,7 +7,7 @@ export async function newBlankProject(page: Page): Promise<void> {
 }
 
 export function nodeByLabel(page: Page, label: string) {
-  return page.locator('.react-flow__node', { hasText: label });
+  return page.locator('.react-flow__node', { has: page.getByText(label, { exact: true }) });
 }
 
 export async function dropFromPalette(
@@ -15,8 +15,10 @@ export async function dropFromPalette(
   slug: string,
   pos: { x: number; y: number },
 ): Promise<void> {
-  const item = page.locator(`[data-slug="${slug}"]`);
-  const canvas = page.locator('.react-flow');
-  await item.dragTo(canvas, { targetPosition: pos });
-  await page.waitForTimeout(500);
+  const item = page.getByTestId(`palette-item-${slug}`);
+  await item.waitFor();
+  // Playwright's HTML5 DnD does not always populate dataTransfer mime types.
+  // Click-to-place is the documented accessibility path and is reliable here.
+  await item.click();
+  await page.getByTestId('canvas').click({ position: pos });
 }
