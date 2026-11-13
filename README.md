@@ -93,7 +93,7 @@ without one, unless `RACKDRAFTER_INSECURE=1`).
 | `npm start`            | production: serves `dist/client` and the API               |
 | `npm run build`        | typecheck and build the client                             |
 | `npm test`             | Vitest (shared, server, client projects)                   |
-| `npm run test:e2e`     | Playwrite, Chromium                                       |
+| `npm run test:e2e`     | Playwright, Chromium                                       |
 | `npm run verify`       | everything, in order                                       |
 | `npm run icons:fetch`  | refresh bundled icons and glyphs (network)                 |
 | `npm run icons:verify` | offline check of hashes, coverage and licences             |
