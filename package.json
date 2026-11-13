@@ -17,7 +17,8 @@
     "api": "tsx src/server/dev-server.ts",
     "db:generate": "drizzle-kit generate",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:e2e": "npm run build && playwright test --grep-invert \"@visual|@perf\""
   },
   "dependencies": {
     "@fastify/middie": "^9.0.3",
@@ -46,7 +47,9 @@
     "zustand": "^5.0.8"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
     "@eslint/js": "^9.38.0",
+    "@playwright/test": "^1.56.1",
     "@tabler/icons": "^3.35.0",
     "@tailwindcss/vite": "^4.1.16",
     "@testing-library/jest-dom": "^6.9.1",
