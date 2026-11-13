@@ -59,7 +59,7 @@ function hostUnder(
 const edgeTypes = { link: LinkEdgeView, tether: TetherEdgeView };
 
 export function Canvas({ readOnly = false }: { readOnly?: boolean }) {
-  const project = useAppStore((s) => s.project);
+  const project = useAppStore((s) => ({ ...s.project }));
   const selection = useAppStore((s) => s.selection);
   const panels = useAppStore((s) => s.panels);
   const tool = useAppStore((s) => s.tool);
