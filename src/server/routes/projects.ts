@@ -19,10 +19,24 @@ import {
 } from '../db/repo/projects.ts';
 import { latestVersionNo, maybeAutoVersion } from '../db/repo/versions.ts';
 import { hashDocument } from '../hash.ts';
-import { badRequest, notFound } from '../errors.ts';
+import { badRequest, notFound, unsupportedDocument } from '../errors.ts';
 import { projects as projectsTable } from '../db/schema.ts';
 import { eq } from 'drizzle-orm';
 import { parseBody } from '../parse.ts';
+
+function parseIncomingDocument(raw: unknown): Project {
+  let migrated: unknown;
+  try {
+    migrated = migrateProject(raw);
+  } catch (err) {
+    throw unsupportedDocument(err instanceof Error ? err.message : 'migration failed');
+  }
+  const parsed = ProjectSchema.safeParse(migrated);
+  if (!parsed.success) {
+    throw unsupportedDocument('document failed schema validation', parsed.error.issues);
+  }
+  return parsed.data;
+}
 
 export async function registerProjects(app: FastifyInstance, db: Db): Promise<void> {
   app.get('/api/projects', async () => ({ projects: listProjects(db) }));
@@ -57,7 +71,7 @@ export async function registerProjects(app: FastifyInstance, db: Db): Promise<vo
         source = 'seed';
         label = `Seed ${fromSeed}`;
       } else if (document !== undefined) {
-        base = ProjectSchema.parse(migrateProject(document));
+        base = parseIncomingDocument(document);
         source = 'import';
         label = 'Imported';
       } else {
@@ -109,8 +123,7 @@ export async function registerProjects(app: FastifyInstance, db: Db): Promise<vo
           current,
         });
       }
-      console.log('put document', id, put.baseSeq);
-      const document = ProjectSchema.parse(migrateProject(put.document));
+      const document = parseIncomingDocument(put.document);
       document.id = row.id;
       document.updatedAt = clock.nowIso();
       const hash = hashDocument(document);
