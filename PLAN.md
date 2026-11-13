@@ -10,7 +10,7 @@ This document is the contract for the implementing agent. Every decision here is
 
 | Concern | Decision |
 |---|---|
-| Language / build | TypeScript 5.6+ (strict), Vite 5, React 19 |
+| Language / build | TypeScript 5.6+ (strict), Vite 6, React 19 |
 | Canvas | `@xyflow/react` v12 |
 | State | Zustand 5 + Immer 10 (`produceWithPatches`) for undo/redo |
 | Validation | Zod 4 (`zod@^4`) |
